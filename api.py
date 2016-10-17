@@ -1,5 +1,5 @@
 
-def APIClass:
+class APIClass():
 	def get():
 		pass
 	def post():
