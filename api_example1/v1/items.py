@@ -22,6 +22,7 @@ class items(APIClass):
 	def put(self, req, res):
 		headers = [('Content-type', 'text/json')]
 		res(STATUS_OK, headers)
+		
 		return ""
 		
 		

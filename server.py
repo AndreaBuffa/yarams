@@ -3,7 +3,13 @@ from wsgiref.simple_server import make_server
 from common import *
 
 def myApp(environ, start_response):
+
 	setup_testing_defaults(environ)
+	#headers = [('Content-type', 'text/plain')]
+	#start_response('200 OK', headers)
+	#ret = ["%s: %s\n" % (key, value)
+		#for key, value in environ.iteritems()]
+	#return ret
 
 	if environ['PATH_INFO']:
 		path = environ['PATH_INFO']
@@ -13,7 +19,7 @@ def myApp(environ, start_response):
 		#ret = ["%s\n" % (value) for value in pathTokens]
 		import importlib
 		importlib.import_module('api')
-		path = '.'.join(map(str, pathTokens[1:]))
+		path = '.'.join(map(str, pathTokens[1:4]))
 		#print path
 		module = importlib.import_module(path)
 		classToInst = getattr(module, str(pathTokens[3]))
@@ -22,9 +28,6 @@ def myApp(environ, start_response):
 	else:
 		pass
 
-    #ret = ["%s: %s\n" % (key, value)
-           #for key, value in environ.iteritems()]
-	#return ret
 
 httpd = make_server('', PORT, myApp)
 
