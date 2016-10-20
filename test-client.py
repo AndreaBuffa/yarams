@@ -18,7 +18,7 @@ def test(method, path, params):
 		res = requests.put('http://' + SERVER + path,
 							data = json.dumps(context))
 	elif method == 'post':
-		res = requests.post('http://' + SERVER + path)
+		res = requests.post('https://' + SERVER + path)
 
 	print "****** " + method.upper() + ' ' + path + params
 

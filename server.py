@@ -1,10 +1,10 @@
-from wsgiref.util import setup_testing_defaults
-from wsgiref.simple_server import make_server
+from eventlet import wsgi
+import eventlet
 from common import *
 
 def myApp(environ, start_response):
 
-	setup_testing_defaults(environ)
+	#setup_testing_defaults(environ)
 	#headers = [('Content-type', 'text/plain')]
 	#start_response('200 OK', headers)
 	#ret = ["%s: %s\n" % (key, value)
@@ -28,9 +28,9 @@ def myApp(environ, start_response):
 	else:
 		pass
 
+wsgi.server(eventlet.listen(('', PORT)), myApp)
 
-httpd = make_server('', PORT, myApp)
-
-print "Serving on port " + str(PORT) + "...."
-
-httpd.serve_forever()
+wsgi.server(eventlet.wrap_ssl(eventlet.listen(('', PORT)),
+	certfile='cert.crt',
+	keyfile='private.key',
+	server_side=True), myApp)
