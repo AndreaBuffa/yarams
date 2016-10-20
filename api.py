@@ -8,13 +8,13 @@ def build404Res(start_response):
 class APIClass():
 
 	def get(self, req, res):
-		return build404Res(start_response)
+		return build404Res(res)
 
 	def post(self, req, res):
-		return build404Res(start_response)
+		return build404Res(res)
 
 	def put(self, req, res):
-		return build404Res(start_response)
+		return build404Res(res)
 
 	def delete(self, req, res):
-		return build404Res(start_response)
+		return build404Res(res)

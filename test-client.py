@@ -24,16 +24,22 @@ def test(method, path, params):
 
 	print res.status_code
 
-	context = json.loads(res.content)
 	if res.status_code == OK:
+		context = json.loads(res.content)
 		print res.content
 		print "SUCCESS"
 	else:
 		print "FAILED"
 		exit()
 
+# CREATE a new item
 test('post', '/api_example1/v1/items', '')
-print context
+
+# EDIT a new item
 test('put', '/api_example1/v1/items/' + str(context['id']), '')
+# View a particular item
+test('get', '/api_example1/v1/items/' + str(context['id']), '')
+# View all items
 test('get', '/api_example1/v1/items', '')
+# DEL
 test('delete', '/api_example1/v1/items', '')
